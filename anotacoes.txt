@@ -1,0 +1,43 @@
+aprendizados:
+
+	export const SummaryCard = styled.div ``
+	
+	- cria um componente div estilizado e pode ser usado como <SummaryCard />
+
+-------
+
+	interface SummaryCardProps {
+		variant?: 'green' | 'red';
+	}
+
+	export const SummaryCard = styled.div<SummaryCardProps> `
+		${props => props.variant === 'green' && css`
+			background: .......
+		`}
+	`
+
+	<SummaryCard variant="green" />
+
+	- cria uma propriedade variante do proprio componente estilizado e adiciona um css 	  dependendo do valor dessa propriedade
+
+-------
+
+	radix: tem uns componentes maneiros e acessiveis com uma documentaçao boa pra usar
+	o usado nessa aula (projeto 03 - 1.8) é o modal
+
+-------
+
+	&[data-state='checked'] {
+	
+	- estilizando a partir do estado de radio buttons (aula 1.10, projeto 3)
+
+-------
+
+	JSON Server: para criar APIs em JSON para quando seu backend não estiver pronto e
+	vc precisar testar seu frontend na prática
+
+-------
+
+	formatou data de uma forma muito simples (aula 2.5)
+
+	
