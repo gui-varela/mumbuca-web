@@ -61,10 +61,70 @@ export const CustomerInfo = styled.div`
       color: ${(props) => props.theme['gray-400']};
     }
   }
+
+  .CPFSearch {
+    display: flex;
+    align-items: flex-end;
+
+    button {
+      margin: 0 0 1rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 2.5rem;
+      background-color: ${(props) => props.theme['red-500']};
+      color: ${(props) => props.theme.white};
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 50px;
+      transition: 200ms;
+
+      &:hover {
+        background-color: ${(props) => props.theme['red-700']};
+      }
+    }
+  }
+
+  .customer {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    p.customerInfo {
+      display: flex;
+      align-items: center;
+      color: ${(props) => props.theme['gray-500']};
+      font-weight: 500;
+
+      svg {
+        margin-right: 0.5rem;
+        color: ${(props) => props.theme['green-300']};
+      }
+    }
+
+    p.customerError {
+      display: flex;
+      align-items: center;
+      color: ${(props) => props.theme['gray-500']};
+
+      svg {
+        margin-right: 0.5rem;
+        color: ${(props) => props.theme['red-500']};
+      }
+    }
+  }
 `
 
 export const CheckboxDiv = styled.div`
   display: flex;
+  margin-bottom: 1rem;
+`
+
+export const CpfInput = styled.div`
+  display: flex;
+  flex-direction: column;
   margin-bottom: 1rem;
 `
 

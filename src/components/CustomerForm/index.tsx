@@ -1,15 +1,20 @@
 import { useState, useEffect } from 'react'
-import { Documents, CustomerInfo, CheckboxDiv } from './styles'
+import { Documents, CustomerInfo, CheckboxDiv, CpfInput } from './styles'
+import { CheckCircle, MagnifyingGlass, XCircle } from 'phosphor-react'
 
-import { getCustomerTypes } from '../../services/api'
+import { getCustomerTypes, getCustomerByCPF } from '../../services/api'
 
 import { RadixCheckbox } from '../RadixCheckbox'
 import { LoadingDialog } from '../LoadingDialog'
 
 export function CustomerForm() {
   const [checked, setChecked] = useState(false)
+  const [cpf, setCPF] = useState('')
   const [customerTypes, setCustomerTypes] = useState([])
   const [loading, setLoading] = useState(true)
+  const [customerInfo, setCustomerInfo] = useState('')
+
+  const errorMessage = 'Digite o CPF corretamente.'
 
   useEffect(() => {
     ;(async () => {
@@ -18,6 +23,45 @@ export function CustomerForm() {
       setLoading(false)
     })()
   }, [])
+
+  const handleCustomer = async () => {
+    console.log(cpf)
+    if (cpf) {
+      try {
+        const customer = await getCustomerByCPF(cpf)
+        console.log(customer)
+        if (customer) {
+          setCustomerInfo(`${customer.data.name} (CPF: ${customer.data.cpf})`)
+        }
+      } catch {
+        setCustomerInfo(errorMessage)
+      }
+    } else {
+      setCustomerInfo(errorMessage)
+    }
+  }
+
+  const handleCustomerContent = () => {
+    if (customerInfo === '') {
+      return <></>
+    }
+
+    if (customerInfo === errorMessage) {
+      return (
+        <p className="customerError">
+          <XCircle weight="bold" size={20} />
+          {customerInfo}
+        </p>
+      )
+    }
+
+    return (
+      <p className="customerInfo">
+        <CheckCircle weight="bold" size={20} />
+        {customerInfo}
+      </p>
+    )
+  }
 
   if (loading) {
     return <LoadingDialog />
@@ -64,7 +108,7 @@ export function CustomerForm() {
           <div>
             {customerTypes.map((customerType) => (
               <CheckboxDiv key={customerType.id}>
-                <RadixCheckbox></RadixCheckbox>
+                <RadixCheckbox name></RadixCheckbox>
                 <label>{customerType.name}</label>
               </CheckboxDiv>
             ))}
@@ -74,12 +118,25 @@ export function CustomerForm() {
     } else {
       return (
         <CustomerInfo>
-          <div className="CPF">
-            <h2>
-              <span>1. </span>Cliente
-            </h2>
-            <input placeholder="CPF ou Nome" type="text" name="" id="" />
+          <div className="CPFSearch">
+            <CpfInput>
+              <h2>
+                <span>1. </span>Cliente
+              </h2>
+              <input
+                onChange={(e) => setCPF(e.target.value)}
+                placeholder="CPF ou Nome"
+                type="text"
+                name=""
+                id=""
+              />
+            </CpfInput>
+            <button type="button" onClick={handleCustomer}>
+              <MagnifyingGlass size={20} weight="bold" />
+              Buscar
+            </button>
           </div>
+          <div className="customer">{handleCustomerContent()}</div>
         </CustomerInfo>
       )
     }
@@ -87,9 +144,13 @@ export function CustomerForm() {
 
   return (
     <>
-      <CheckboxDiv onClick={() => setChecked(!checked)}>
-        <RadixCheckbox data-state={checked}></RadixCheckbox>
-        <label>Novo cliente</label>
+      <CheckboxDiv
+        onClick={() => {
+          setChecked(!checked)
+          setCustomerInfo('')
+        }}
+      >
+        <RadixCheckbox label="Novo cliente" id="novoCliente"></RadixCheckbox>
       </CheckboxDiv>
 
       {handleRendering(!checked)}

@@ -21,6 +21,7 @@ export const HeaderContent = styled.div`
 
   img {
     height: 2.8rem;
+    cursor: pointer;
   }
 
   .signOut {
@@ -46,6 +47,7 @@ export const HeaderContent = styled.div`
     display: flex;
     align-items: center;
     width: 10rem;
+    cursor: pointer;
 
     p {
       font-size: 1rem;
@@ -55,7 +57,7 @@ export const HeaderContent = styled.div`
     svg {
       margin-right: 0.8rem;
       color: ${(props) => props.theme['red-500']};
-      cursor: pointer;
+
     }
   }
 `

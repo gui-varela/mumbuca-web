@@ -17,10 +17,11 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const recoveredUser = localStorage.getItem('user')
     const token = localStorage.getItem('token')
+    const formattedToken = token ? token.replace(/["]/g, '') : null
 
     if (recoveredUser && token) {
       setUser(JSON.parse(recoveredUser))
-      api.defaults.headers.Authorization = `Bearer ${token}`
+      api.defaults.headers.Authorization = `Bearer ${formattedToken}`
     }
 
     delay(1000)
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('token', JSON.stringify(token))
 
     setUser(loggedUser)
-    navigate('/')
+    navigate('/triagem')
   }
 
   const logout = () => {

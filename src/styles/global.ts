@@ -21,4 +21,8 @@ export const GlobalStyle = createGlobalStyle`
   body, input, textarea, button, select, option {
     font: 400 1rem 'Montserrat', sans-serif;
   }
+
+  button {
+    cursor: pointer;
+  }
 `

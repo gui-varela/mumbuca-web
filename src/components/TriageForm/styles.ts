@@ -53,21 +53,59 @@ export const Container = styled.div`
     }
 
     button[type='submit'] {
-      margin-top: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 8rem;
+      margin: 3rem 0 1rem;
       background-color: ${(props) => props.theme['red-500']};
       color: ${(props) => props.theme.white};
       font-weight: 600;
       padding: 0.5rem 1rem;
       border: none;
       border-radius: 50px;
+      transition: 200ms;
+
+      &:not(:disabled):hover {
+        background-color: ${(props) => props.theme['red-700']};
+      }
+
+      &:disabled {
+        transition: 500ms;
+        background-color: ${(props) => props.theme['red-300']};
+        width: 10rem;
+        cursor: not-allowed;
+
+        @keyframes rotate {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+        svg {
+          margin-right: 0.5rem;
+          display: block;
+          color: ${(props) => props.theme['red-500']};
+
+          animation-name: rotate;
+          animation-delay: 200ms;
+          animation-duration: 3s;
+          animation-iteration-count: infinite;
+        }
+      }
+
+      svg {
+        margin-right: 0.5rem;
+        display: none;
+      }
     }
   }
 `
-export const Agency = styled(RadioGroup)`
-  display: flex;
-`
 
-export const AgencyButton = styled(RadioGroupItem)`
+export const RadioItem = styled(RadioGroupItem)`
   padding: 0.5rem 0.7rem;
   margin-right: 1rem;
   background-color: ${(props) => props.theme.white};
@@ -89,4 +127,9 @@ export const AgencyButton = styled(RadioGroupItem)`
       background-color: ${(props) => props.theme['red-100']};
     }
   }
+`
+
+export const CheckboxDiv = styled.div`
+  display: flex;
+  margin-bottom: 1rem;
 `

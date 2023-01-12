@@ -80,6 +80,11 @@ export const LoginContainer = styled.div`
       background-color: ${(props) => props.theme['red-500']};
       border: none;
       border-radius: 50px;
+      transition: 200ms;
+
+      &:hover {
+        background-color: ${(props) => props.theme['red-700']};
+      }
     }
 
     a {

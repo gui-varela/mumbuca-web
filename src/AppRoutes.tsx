@@ -11,6 +11,7 @@ import { Triage } from './pages/Triage'
 import { Login } from './pages/Login'
 import { AuthProvider, AuthContext } from './contexts/auth'
 import { LoadingDialog } from './components/LoadingDialog'
+import { Home } from './pages/Home'
 
 export const AppRoutes = () => {
   const Private = ({ children }) => {
@@ -39,10 +40,18 @@ export const AppRoutes = () => {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route
-            path="/"
+            path="/triagem"
             element={
               <Private>
                 <Triage />
+              </Private>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <Private>
+                <Home />
               </Private>
             }
           />
