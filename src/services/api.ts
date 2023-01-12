@@ -29,3 +29,7 @@ export const getAgencies = async () => {
 export const getForwardings = async () => {
   return await api.get('/forwarding')
 }
+
+export const getQueueByAgency = async (id: string) => {
+  return await api.get(`/triage?agency=${id}`)
+}

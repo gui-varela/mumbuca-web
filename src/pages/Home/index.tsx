@@ -31,7 +31,7 @@ export function Home() {
               Iniciar Atendimento
             </div>
           </button>
-          <button className="fila">
+          <button className="fila"  onClick={() => navigate('/fila')}>
             <div>
               Fila de Atendimento
               <ArrowFatLinesRight size={20} weight="fill" />

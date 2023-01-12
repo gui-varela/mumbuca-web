@@ -12,6 +12,7 @@ import { Login } from './pages/Login'
 import { AuthProvider, AuthContext } from './contexts/auth'
 import { LoadingDialog } from './components/LoadingDialog'
 import { Home } from './pages/Home'
+import { AttendanceQueue } from './pages/AttendanceQueue'
 
 export const AppRoutes = () => {
   const Private = ({ children }) => {
@@ -52,6 +53,14 @@ export const AppRoutes = () => {
             element={
               <Private>
                 <Home />
+              </Private>
+            }
+          />
+          <Route
+            path="/fila"
+            element={
+              <Private>
+                <AttendanceQueue />
               </Private>
             }
           />
